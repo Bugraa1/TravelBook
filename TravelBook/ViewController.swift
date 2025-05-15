@@ -184,6 +184,15 @@ class ViewController: UIViewController , MKMapViewDelegate , CLLocationManagerDe
     
     @IBAction func saveButtonClicked(_ sender: Any) {
         
+        if nameText.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+               commentText.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+                
+                let alert = UIAlertController(title: "Hata", message: "İsim ve açıklama boş bırakılamaz.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
